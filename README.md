@@ -1,6 +1,4 @@
-# Task Manager (task-manager)
-
-Task Manager
+# Quasar Boilerplate
 
 ## Install the dependencies
 ```bash
