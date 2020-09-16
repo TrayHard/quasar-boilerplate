@@ -29,6 +29,7 @@ module.exports = configure((ctx) => ({
     'composition-api',
     'axios',
     'mixins',
+    'vuex'
   ],
 
   // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
