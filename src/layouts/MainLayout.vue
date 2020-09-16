@@ -21,10 +21,7 @@
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api';
 
-const linksData = [
-
 export default defineComponent({
   name: 'MainLayout',
-
 });
 </script>
