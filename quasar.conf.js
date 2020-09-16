@@ -28,6 +28,7 @@ module.exports = configure((ctx) => ({
   boot: [
     'composition-api',
     'axios',
+    'mixins',
   ],
 
   // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
@@ -71,11 +72,11 @@ module.exports = configure((ctx) => ({
 
     // https://quasar.dev/quasar-cli/handling-webpack
     extendWebpack(cfg) {
-      // linting is slow in TS projects, we execute it only for production builds
       cfg.module.rules.push({
         test: /\.pug$/,
         loader: 'pug-plain-loader',
       });
+      // linting is slow in TS projects, we execute it only for production builds
       if (ctx.prod) {
         cfg.module.rules.push({
           enforce: 'pre',
