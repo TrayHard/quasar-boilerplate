@@ -1,55 +1,34 @@
-import { Getters, Mutations, Actions, Module, createMapper } from 'vuex-smart-module'
-
 export type User = {
     name: string;
     password: string;
 }
 
-export class AuthState {
-    isLoggedIn: boolean = false;
-    user1: User = {
+export const auth = {
+    isLoggedIn: false as boolean,
+    user1: {
         name: 'John',
         password: 'Doe',
-    }
-}
+    } as User,
 
-class AuthGetters extends Getters<AuthState> {
-    get loginStatus() {
-        return this.state.isLoggedIn ? "authorized" : 'not authorized'
-    }
-}
+    get loginStatus(): string {
+        return this.isLoggedIn ? "authorized" : 'not authorized';
+    },
 
-class AuthMutations extends Mutations<AuthState> {
-    SET_LOGIN(payload: boolean) {
-        this.state.isLoggedIn = payload;
-    }
-}
+    SET_LOGIN(payload: boolean): void {
+        this.isLoggedIn = payload;;
+    },
 
-class AuthActions extends Actions<
-    AuthState,
-    AuthGetters,
-    AuthMutations,
-    AuthActions
-> {
-    check_login(payload: User) {
+    check_login(payload: User): Promise<Error | string>  {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                if (this.state.user1.name === payload.name && this.state.user1.password === payload.password) {
-                    this.commit('SET_LOGIN', true);
-                    resolve(`User is ${this.getters.loginStatus}`)
+                if (this.user1.name === payload.name && this.user1.password === payload.password) {
+                    this.SET_LOGIN(true);
+                    resolve(`User is ${this.loginStatus}`);
                 } else {
-                    this.commit('SET_LOGIN', false);
-                    reject(new Error(`User is ${this.getters.loginStatus}`))
+                    this.SET_LOGIN(false);
+                    reject(new Error(`User is ${this.loginStatus}`))
                 }
-            }, 1000)
-        })
-    }
-}
-
-export const auth = new Module({
-    state: AuthState,
-    getters: AuthGetters,
-    mutations: AuthMutations,
-    actions: AuthActions
-})
-export const authMapper = createMapper(auth)
+            }, 1000);
+        });
+    },
+};

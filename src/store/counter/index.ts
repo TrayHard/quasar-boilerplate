@@ -1,44 +1,22 @@
-import { Getters, Mutations, Actions, Module, createMapper } from 'vuex-smart-module'
+export const counter = {
+    counter: 0 as number,
 
-class CounterState {
-    counter: number = 0;
-}
+    get doubleCounter(): number {
+        return this.counter * 2;
+    },
+    get tripleCounter(): number {
+        return this.doubleCounter + this.counter;
+    },
 
-class CounterGetters extends Getters<CounterState> {
-    get doubleCounter() {
-        return this.state.counter * 2;
-    }
-    get tripleCounter() {
-        return this.doubleCounter + this.state.counter;
-    }
-}
+    INCREMENT(payload: number): void {
+        this.counter += payload;
+    },
 
-class CounterMutations extends Mutations<CounterState> {
-    INCREMENT(payload: number) {
-        this.state.counter += payload;
-    }
-}
-
-class CounterActions extends Actions<
-    CounterState,
-    CounterGetters,
-    CounterMutations,
-    CounterActions
-> {
-    actIncrement() {
-        return new Promise((resolve) => {
+    actIncrement(): Promise<void> {
+        return new Promise(() => {
             setTimeout(() => {
-                this.commit('INCREMENT', 2);
-                resolve()
+                this.INCREMENT(2);
             }, 1000)
         })
-    }
-}
-
-export const counter = new Module({
-    state: CounterState,
-    getters: CounterGetters,
-    mutations: CounterMutations,
-    actions: CounterActions
-})
-export const counterMapper = createMapper(counter)
+    },
+};

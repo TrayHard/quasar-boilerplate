@@ -14,62 +14,61 @@ q-page.row.items-center.justify-evenly
 </template>
 
 <script lang="ts">
+import Vue from 'vue';
 import { Todo, Meta } from 'components/models';
 import ExampleComponent from 'components/CompositionComponent.vue';
-import { defineComponent, ref } from '@vue/composition-api';
-import { counter, counterMapper } from 'src/store/counter';
-import { auth } from 'src/store/auth';
 
-export default defineComponent({
+export default Vue.extend({
     name: 'PageIndex',
     components: { ExampleComponent },
     data(): {
         regularData: string;
+        todos: Todo[];
+        meta: Meta;
         } {
         return {
             regularData: 'check',
+            meta: { totalCount: 1200, },
+            todos: [
+                {
+                    id: 1,
+                    content: 'ct1',
+                },
+                {
+                    id: 2,
+                    content: 'ct2',
+                },
+                {
+                    id: 3,
+                    content: 'ct3',
+                },
+                {
+                    id: 4,
+                    content: 'ct4',
+                },
+                {
+                    id: 5,
+                    content: 'ct5',
+                },
+            ]
         };
     },
+    mounted () {
+    },
     computed: {
-        ...counterMapper.mapState(['counter']),
-        ...counterMapper.mapGetters(['tripleCounter']),
+        counter(): number { return this.$store.counter.counter },
+        tripleCounter(): number { return this.$store.counter.tripleCounter },
         localComputed(): string {
-            const ctx = auth.context(this.$store);
-            return ctx.getters.loginStatus;
+            return this.$store.auth.loginStatus
         },
     },
     methods: {
-        ...counterMapper.mapActions(['actIncrement']),
-        inc() {
-            const ctx = counter.context(this.$store);
-            ctx.mutations.INCREMENT(1);
+        actIncrement(): void {
+            this.$store.counter.actIncrement()
         },
-    },
-    setup() {
-        const todos = ref<Todo[]>([
-            {
-                id: 1,
-                content: 'ct1',
-            },
-            {
-                id: 2,
-                content: 'ct2',
-            },
-            {
-                id: 3,
-                content: 'ct3',
-            },
-            {
-                id: 4,
-                content: 'ct4',
-            },
-            {
-                id: 5,
-                content: 'ct5',
-            },
-        ]);
-        const meta = ref<Meta>({ totalCount: 1200, });
-        return { todos, meta };
+        inc() {
+            this.$store.counter.INCREMENT(1)
+        },
     },
 });
 </script>

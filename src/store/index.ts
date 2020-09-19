@@ -1,26 +1,13 @@
+import { auth } from './auth'
+import { counter } from './counter'
 
-import { auth, counter } from './modules';
-
-export default {
-    modules: {
-        auth,
-        counter,
-    },
+export const rootObj = {
+    data1: 100,
+    data2: "test"
 }
 
-// export default store(({ Vue }) => {
-//     const Store = createStore(
-//         new Module({
-//             modules: {
-//                 auth,
-//                 counter,
-//             },
-//         }),
-//         // Vuex options
-//         {
-//             strict: !!process.env.DEV,
-//         }
-//     );
-
-//     return Store;
-// });
+export default {
+    ...rootObj,
+    auth,
+    counter,
+}
