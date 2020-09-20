@@ -2,14 +2,14 @@ import { route } from 'quasar/wrappers';
 import VueRouter from 'vue-router';
 import routes from './routes';
 
-// import store from 'src/store';
 // import { counter, auth } from 'src/store/modules';
 /*
- * If not building with SSR mode, you can
- * directly export the Router instantiation
- */
+* If not building with SSR mode, you can
+* directly export the Router instantiation
+*/
+import Store from 'src/store';
 
-export default route(({ Vue }) => {
+export default route(({ Vue, store }: { Vue: any, store: typeof Store }) => {
   Vue.use(VueRouter);
   // const counterStore = counter.context(store);
   // const authStore = auth.context(store);

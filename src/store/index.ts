@@ -6,8 +6,12 @@ export const rootObj = {
     data2: "test"
 }
 
-export default {
+const state = {
     ...rootObj,
     auth,
     counter,
 }
+
+export type Store = typeof state;
+
+export default state;
