@@ -1,12 +1,8 @@
 <template>
-  <div id="q-app">
-    <router-view />
-  </div>
+  <router-view />
 </template>
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api';
+import { Vue } from 'vue-class-component'
 
-export default defineComponent({
-  name: 'App',
-});
+export default class App extends Vue {}
 </script>
