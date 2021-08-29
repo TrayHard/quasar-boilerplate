@@ -1,4 +1,6 @@
-# Quasar Boilerplate
+# Web Client Quasar boilerplate (web-client-quasar)
+
+Boilerplate for web client quasar project
 
 ## Install the dependencies
 ```bash
@@ -21,4 +23,4 @@ quasar build
 ```
 
 ### Customize the configuration
-See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).
+See [Configuring quasar.conf.js](https://v2.quasar.dev/quasar-cli/quasar-conf-js).
