@@ -12,9 +12,9 @@
 <script lang="ts">
 import { Todo, Meta } from 'components/models';
 import ExampleComponent from 'components/ClassComponent.vue';
-import { Vue, Options } from 'vue-class-component'
+import { Vue, Component } from 'vue-property-decorator';
 
-@Options({
+@Component({
   components: { ExampleComponent }
 })
 export default class PageIndex extends Vue {

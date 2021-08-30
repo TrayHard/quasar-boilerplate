@@ -8,7 +8,7 @@
           round
           icon="menu"
           aria-label="Menu"
-          @click="toggleLeftDrawer"
+          @click="leftDrawerOpen = !leftDrawerOpen"
         />
 
         <q-toolbar-title>
@@ -23,7 +23,7 @@
       v-model="leftDrawerOpen"
       show-if-above
       bordered
-      class="bg-grey-1"
+      content-class="bg-grey-1"
     >
       <q-list>
         <q-item-label
@@ -32,7 +32,6 @@
         >
           Essential Links
         </q-item-label>
-
         <EssentialLink
           v-for="link in essentialLinks"
           :key="link.title"
@@ -50,7 +49,7 @@
 <script lang="ts">
 import EssentialLink from 'components/EssentialLink.vue'
 
-const linksList = [
+const linksData = [
   {
     title: 'Docs',
     caption: 'quasar.dev',
@@ -95,16 +94,13 @@ const linksList = [
   }
 ];
 
-import { Vue, Options } from 'vue-class-component'
+import { Vue, Component } from 'vue-property-decorator';
 
-@Options({
+@Component({
   components: { EssentialLink }
 })
 export default class MainLayout extends Vue {
   leftDrawerOpen = false;
-  essentialLinks = linksList;
-  toggleLeftDrawer () {
-    this.leftDrawerOpen = !this.leftDrawerOpen
-  }
+  essentialLinks = linksData;
 }
 </script>

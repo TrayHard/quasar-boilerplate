@@ -22,15 +22,13 @@
 </template>
 
 <script lang="ts">
-import { Vue, prop, Options } from 'vue-class-component';
+import { Vue, Component, Prop } from 'vue-property-decorator';
 
-class Props {
-  readonly title!: string;
-  readonly caption = prop({ default: '' });
-  readonly link = prop({ default: '#' });
-  readonly icon = prop({ default: '' });
+@Component
+export default class EssentialLink extends Vue {
+  @Prop({ type: String, required: true }) readonly title!: string;
+  @Prop({ type: String, default: '' }) readonly caption!: string;
+  @Prop({ type: String, default: '#' }) readonly link!: string;
+  @Prop({ type: String, default: ''}) readonly icon!: string;
 }
-
-@Options({})
-export default class EssentialLink extends Vue.with(Props) {}
 </script>
